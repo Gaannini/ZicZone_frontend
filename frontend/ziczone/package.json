@@ -2,7 +2,7 @@
   "name": "ziczone",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://223.130.159.46:12000",
+  "proxy": "http://localhost:12000",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.20.0",
     "@react-pdf-viewer/core": "^3.12.0",

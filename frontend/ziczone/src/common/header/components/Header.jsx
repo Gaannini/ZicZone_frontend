@@ -109,6 +109,7 @@ const Header = () => {
       localStorage.removeItem("userId");
       localStorage.removeItem("userRole");
     }
+    await api.post('/api/logout');
 
     dispatch(logoutUser());
     dispatch(deleteAlarm());

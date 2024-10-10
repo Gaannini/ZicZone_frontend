@@ -2,7 +2,8 @@ import axios from 'axios';
 import config from '../../config';
 
 const api = axios.create({
-  baseURL: config.baseURL
+  baseURL: config.baseURL,
+  withCredentials: true
 });
 
 api.interceptors.request.use(config => {
@@ -21,12 +22,12 @@ api.interceptors.response.use(
     if(error.response.status === 401 && error.response.data.message === "Access token expired"){
       console.log("토큰 만료");
 
-      // 쿠키에서 Refresh Token을 가져옴(정규식)
-      const refreshToken = document.cookie.replace(/(?:(?:^|.*;\s*)refresh_token\s*\=\s*([^;]*).*$)|^.*$/,"$1"); 
       const accessToken = localStorage.getItem('token'); // access Token
 
       try {
-        const response = await api.post("/api/token/refresh", { accessToken, refreshToken });
+        const response = await api.post("/api/token/refresh", 
+          { accessToken }
+        );
           const newAccessToken = response.data.access_token;
           localStorage.setItem("token", newAccessToken);
           error.config.headers['Authorization'] = `Bearer ${newAccessToken}`;

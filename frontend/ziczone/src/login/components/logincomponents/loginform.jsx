@@ -86,12 +86,10 @@ const LoginForm = ({
       });
 
       if (response.status===200) {
-        const {access_token, refresh_token} = response.data;
+        const {access_token} = response.data;
 
-        if(access_token&&refresh_token){
+        if(access_token){
           const user = saveToken(access_token); // accessToken은 localStorage에 저장
-          document.cookie = `refresh_token=${refresh_token}; HttpOnly`;
-          // document.cookie = `refresh_token=${refresh_token};`;
 
           if (user) {
             // 구독 및 초기화 작업 수행
